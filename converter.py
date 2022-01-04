@@ -1,4 +1,19 @@
 import sys, os
+from typing import List
+
+def bitsToString(bits):
+    # join the bits to form a string
+    return "".join(map(lambda x: str(x), bits))
+
+def unsigned_to_denary(unsigned_bits: List[int]):
+    base = 1
+    res = 0
+    i = len(unsigned_bits) - 1
+    while i >= 0:
+        res += unsigned_bits[i] * base
+        i -= 1
+        base *= 2
+    return res
 
 def denary_to_unsigned(denary: int):
     # reject negative values
@@ -12,9 +27,7 @@ def denary_to_unsigned(denary: int):
         remainder = quotient % 2
         bits.insert(0, remainder)
         quotient = int(quotient / 2)
-
-    # join the bits to form a string
-    return "".join(map(lambda x: str(x), bits))
+    return bitsToString(bits)
 
 def main():
 
@@ -30,11 +43,16 @@ def main():
         print(f"Accepted `to` values: {formats}")
         return
 
-    from_num = int(input("Input number: "))
+    input_val = input("Input number/binary: ")
 
     if from_format == "denary":
+        input_val = input(input_val)
         if to_format == "unsigned-binary":
-            print(denary_to_unsigned(from_num))
+            print(denary_to_unsigned(input_val))
+    if from_format == "unsigned-binary":
+        input_val = list(map(lambda x: int(x), list(input_val)))
+        if to_format == "denary":
+            print(unsigned_to_denary(input_val))
 
 if __name__ == "__main__":
     main()
