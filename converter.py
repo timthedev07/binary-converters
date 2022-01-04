@@ -82,6 +82,12 @@ def main():
         input_val = list(map(lambda x: int(x), list(input_val)))
         if to_format == "denary":
             print(unsigned_to_denary(input_val))
+    if from_format == "signed-binary":
+        input_val = list(map(lambda x: int(x), list(input_val)))
+        if to_format == "denary":
+            print(signed_to_denary(input_val))
+        elif to_format == "twos-complement":
+            print(signed_to_twos_complement(input_val))
 
 if __name__ == "__main__":
     main()
